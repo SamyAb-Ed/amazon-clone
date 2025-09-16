@@ -1,0 +1,139 @@
+.header_container {
+    display: flex;
+    align-items: center;
+    background-color: #131921;
+    color: white;
+    gap: 10px;
+    height: 70px;
+}   
+.logo_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 150px;
+}
+.logo_container img {
+    width: 80%;
+    padding-top: 5px;
+    margin-top: 10px;
+    vertical-align: middle;
+}
+.deliver p{
+font-size: 10px;
+}
+.search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+    flex: 1;
+}
+.search input {
+    font-weight: bold;
+    outline: 1px solid white;
+    padding: 10px;
+}
+.search select {
+    border: none;
+}
+.search input{
+    border: 1px solid white;
+    width: 100%;
+    margin-right: -2px;
+}
+.search svg {
+    background-color: #febd69;
+    padding: 7px;
+    color: #1a1a1a;
+}
+.search svg:hover {
+    background-color: #f3a847;
+    cursor: pointer;
+}
+.search:focus-within{
+    border: 2px solid #f3a847;
+
+}
+.order_container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    max-width: 450px;
+}
+.order_container a {
+    text-decoration: none;
+    color: white;
+}
+.order_container p {
+    font-size: 10px;
+}
+.language {
+    width: 100px;
+    display: flex;
+    padding: 10px;
+    cursor: pointer;
+}
+.language select {
+    background-color: #1a1a1a;
+    border: none;
+    color: white;
+}
+.language img {
+    width: 40%;
+}
+.cart {
+   position: relative;
+}
+.cart span {
+    position: absolute;
+    font-weight: bold;
+    top: -6px;
+    font-size: 20px;
+    background-color: #1a1a1a;
+    left: 14px;
+    color: orange;
+}
+.order_container a:hover, .deliver:hover, .logo_container:hover, .lower_container ul li:hover {
+    border: 1px solid white;
+    border-radius: 3px;
+}
+.lower_container {
+    background-color: #232f3e;
+    color: white;
+}
+.lower_container ul{
+    display: flex;
+    list-style: none;
+    gap: 5px;
+}
+.lower_container ul li {
+    padding: 8px;
+    text-decoration: none;
+}
+.lower_container ul li:first-child {
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+
+@media screen and (max-width: 768px) {
+    .header_container {
+        flex-direction: column;
+        height: auto;
+        display: flex;
+    }
+    .lower_container ul {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .lower_container ul li:not(:first-child) {
+    display: none;
+}
+    .language {
+        display: none;
+    }
+}
