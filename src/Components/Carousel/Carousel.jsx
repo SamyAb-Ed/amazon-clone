@@ -1,12 +1,12 @@
 import React from 'react'
-import { Carousel } from 'react-responsive-carousel'
+import { Carousel as ResponsiveCarousel } from 'react-responsive-carousel'
 import { img } from './img/data'
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 
-function CarouselEffect() {
+function Carousel() {
   return (
     <div>
-      <Carousel
+      <ResponsiveCarousel
             autoPlay={true}
             infiniteLoop={true}
             showIndicators={false}
@@ -15,13 +15,13 @@ function CarouselEffect() {
             // interval={3000}
         >
         {
-            img.map((imageItemLink) => {
-                return <img src={imageItemLink} />   
+            img.map((imageItemLink, index) => {
+                return <img key={index} src={imageItemLink} alt={`Carousel ${index + 1}`} />   
             })
         }
-        </Carousel>
+        </ResponsiveCarousel>
     </div>
   )
 }
 
-export default CarouselEffect;
+export default Carousel;
