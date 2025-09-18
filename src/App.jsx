@@ -6,6 +6,8 @@ import Product from "./Components/Product/Product";
 import CategoryDetail from "./Components/Category/CategoryDetail";
 import Cart from "./Pages/Cart/Cart";
 import ProductDetail from "./Pages/ProductDetail/ProductDetail";
+import Orders from "./Pages/Orders/Orders";
+import SignUp from "./Pages/Auth/SignUp";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
@@ -36,6 +38,9 @@ function App() {
           }
         />
         <Route path="/product/:ProductId" element={<ProductDetail />} />
+        <Route path="/orders" element={<Orders />} />
+        <Route path="/login" element={<SignUp />} />
+        <Route path="/signup" element={<SignUp />} />
         {/* Add more routes here, e.g.: */}
       </Routes>
     </>

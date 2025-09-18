@@ -52,17 +52,17 @@ const Header = () => {
           </div>
 
           {/* Account Links */}
-          <a href="/login">
+          <Link to="/login">
             <div>
               <p> Sign in</p>
               <span>Account & Lists</span>
             </div>
-          </a>
+          </Link>
 
-          <a href="/orders">
+          <Link to="/orders">
             <p>Returns</p>
             <span>& Orders</span>
-          </a>
+          </Link>
 
           {/* Cart */}
           <Link to="/cart" className={classes.cart}>
