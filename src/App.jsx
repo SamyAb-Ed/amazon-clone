@@ -32,15 +32,15 @@ function App() {
           path="/cart"
           element={
             <div>
-              <h1>Cart Page</h1>
-              <p>This is the cart page</p>
+              {" "}
+              <h3>Cart Page</h3>
             </div>
           }
         />
-        <Route path="/product/:ProductId" element={<ProductDetail />} />
+        {/* <Route path="/product/:ProductId" element={<ProductDetail />} /> */}
         <Route path="/orders" element={<Orders />} />
         <Route path="/login" element={<SignUp />} />
-        <Route path="/signup" element={<SignUp />} />
+        {/* <Route path="/signup" element={<SignUp />} /> */}
         {/* Add more routes here, e.g.: */}
       </Routes>
     </>
