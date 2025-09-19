@@ -4,7 +4,7 @@ import numeral from "numeral";
 import classes from "./Product.module.css";
 import CurrencyFormat from "../CurrencyFormat/CurrencyFormat";
 
-function ProductCard({ product }) {
+function ProductCard({ product, flex }) {
   const { image, id, title, rating, price } = product;
   const [currentRating, setCurrentRating] = useState(rating?.rate || 0);
 
