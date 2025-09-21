@@ -5,10 +5,14 @@ import { FcSearch } from "react-icons/fc";
 import { SlLocationPin } from "react-icons/sl";
 import { BiCart } from "react-icons/bi";
 import LowerHeader from "./LowerHeader";
+import { useContext } from "react";
+import { DataContext } from "../DataProvider/DataProvider";
 
 const Header = () => {
+  const [{basket}, dispatch] = useContext(DataContext);
+
   return (
-    <>
+    <section >
       <section className={classes.header_container}>
         {/* Logo and Delivery */}
         <div className={classes.logo_container}>
@@ -67,13 +71,13 @@ const Header = () => {
           {/* Cart */}
           <Link to="/cart" className={classes.cart}>
             <BiCart size={35} />
-            <span>0</span>
+            <span>{basket.length}</span>
           </Link>
         </div>
         {/* Lower Header */}
       </section>
       <LowerHeader />
-    </>
+    </section>
   );
 };
 

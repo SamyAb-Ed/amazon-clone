@@ -1,24 +1,46 @@
+/* Product.module.css - Fixed version */
+
 .card_container {
   width: 250px;
+  height: 380px; /* Fixed height for all cards */
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  padding: 10px;
+  padding: 15px;
   color: black;
   text-decoration: none;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  border-radius: 8px;
+  background-color: white;
+  box-sizing: border-box;
+  overflow: hidden;
 }
+
+.card_container:hover {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transform: translateY(-2px);
+  transition: all 0.3s ease;
+}
+
 .card_container:hover .button {
   display: block;
 }
+
+/* Image section - fixed height */
 .image_wrap {
   width: 100%;
-  height: 180px;
+  height: 160px; /* Fixed height for images */
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  margin-bottom: 12px;
+  flex-shrink: 0; /* Prevent shrinking */
 }
+
 .card_container img {
-  padding: 10px;
+  padding: 8px;
   max-width: 100%;
   max-height: 100%;
   width: auto;
@@ -26,38 +48,160 @@
   object-fit: contain;
   display: block;
 }
-.button {
-  background-color: var(--primary-color);
-  cursor: pointer;
-  border: none;
-  padding: 5px 10px;
-  font-weight: 700;
-  width: 100%;
-  margin: 10px 0;
-  border-radius: 30px;
-  position: absolute;
-  bottom: 0;
-  left: 0;
+
+/* Content section - grows to fill remaining space */
+.card_content {
+  display: flex;
+  flex-direction: column;
+  padding: 60px;
+  flex-grow: 1;
+  justify-content: space-between;
+  padding-bottom: 50px; /* Space for button */
 }
-.button:hover {
-  background-color: var(--primary-shade);
+
+/* Title - fixed height with text truncation */
+.card_container h4 {
+  margin: 0 0 10px 0;
+  font-size: 14px;
+  line-height: 1.3;
+  height: 36px; /* Fixed height for 2 lines */
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  font-weight: 600;
 }
+
+/* Rating section - fixed height */
 .rating {
   display: flex;
   align-items: center;
-  padding: 10px 0px;
+  gap: 8px;
+  margin: 8px 0;
+  height: 24px; /* Fixed height */
+  flex-shrink: 0;
 }
-/* Grid wrapper for all product cards */
+
+.rating small {
+  color: #666;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+/* Price section */
+.price_section {
+  margin: 8px 0 12px 0;
+  height: 20px; /* Fixed height */
+  display: flex;
+  align-items: center;
+}
+
+/* Button - positioned at bottom */
+.button {
+  background-color: var(--primary-color, #ff9800);
+  cursor: pointer;
+  border: none;
+  padding: 8px 16px;
+  font-weight: 700;
+  width: 30px;
+  /* margin: 0 0 15px 0; */
+  border-radius: 20px;
+  position: absolute;
+  left: 15px;
+  /* right: 15px; */
+  bottom: 15px;
+  left: 0;
+  display: none; /* Hidden by default */
+  color: white;
+  font-size: 12px;
+  transition: all 0.2s ease;
+}
+
+.button:hover {
+  background-color: var(--primary-shade, #f57c00);
+  transform: translateY(-1px);
+}
+
+/* Grid wrapper */
 .products_grid {
-  margin-top: -10px;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-  align-items: start;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  align-items: stretch; /* All cards same height */
   justify-items: center;
   width: 100%;
-  max-width: 1200px;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 0 16px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Responsive design */
+@media screen and (max-width: 1200px) {
+  .products_grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .products_grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .card_container {
+    width: 100%;
+    max-width: 280px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .products_grid {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 15px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .products_grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .card_container {
+    width: 100%;
+    max-width: 320px;
+  }
+}
+
+/* Flexed product styles */
+.product_flexed {
+  box-shadow: none;
+  height: auto;
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  width: 100%;
+  min-height: 200px;
+  padding: 20px;
+}
+
+.product_flexed .image_wrap {
+  width: 200px;
+  height: 150px;
+  flex-shrink: 0;
+  margin-bottom: 0;
+  margin-right: 20px;
+}
+
+.product_flexed h4 {
+  height: auto;
+  font-size: 18px;
+  -webkit-line-clamp: 3;
+}
+
+.product_flexed .button {
+  display: block;
+  position: static;
+  width: 150px;
+  margin: 10px 0;
 }
