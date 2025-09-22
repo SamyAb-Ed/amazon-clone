@@ -1,4 +1,4 @@
 export const ActionType = {
-    AddToBascket: "AddToBascket",
-    RemoveFromBascket: "RemoveFromBascket"
-}
+  AddToBasket: "AddToBasket",
+  RemoveFromBasket: "RemoveFromBasket",
+};

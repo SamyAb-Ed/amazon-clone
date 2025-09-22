@@ -83,15 +83,7 @@ function App() {
           }
         />
         <Route path="/category/:categoryName" element={<Results />} />
-        <Route
-          path="/cart"
-          element={
-            <div>
-              {" "}
-              <h3>Cart Page</h3>
-            </div>
-          }
-        />
+        <Route path="/cart" element={<Cart />} />
         <Route path="/product/:ProductId" element={<ProductDetail />} />
         <Route path="/orders" element={<Orders />} />
         <Route path="/login" element={<SignUp />} />

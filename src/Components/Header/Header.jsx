@@ -9,10 +9,14 @@ import { useContext } from "react";
 import { DataContext } from "../DataProvider/DataProvider";
 
 const Header = () => {
-  const [{basket}, dispatch] = useContext(DataContext);
+  const [state, dispatch] = useContext(DataContext);
+  const { basket } = state;
+
+  console.log("Header - Current basket:", basket);
+  console.log("Header - Basket length:", basket?.length);
 
   return (
-    <section >
+    <section>
       <section className={classes.header_container}>
         {/* Logo and Delivery */}
         <div className={classes.logo_container}>
@@ -71,7 +75,9 @@ const Header = () => {
           {/* Cart */}
           <Link to="/cart" className={classes.cart}>
             <BiCart size={35} />
-            <span>{basket.length}</span>
+            <span>
+              {basket.reduce((total, item) => total + (item.quantity || 1), 0)}
+            </span>
           </Link>
         </div>
         {/* Lower Header */}

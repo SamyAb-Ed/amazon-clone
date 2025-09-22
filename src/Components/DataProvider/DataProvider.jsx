@@ -10,38 +10,19 @@
 //   );
 // };
 
-
 import React, { createContext, useReducer } from "react";
+import { reducer, initialState } from "../Utility/Reducer";
 
 export const DataContext = createContext();
 
-// Built-in initial state
-const initialState = {
-  basket: [],
-  user: null,
-};
-
-// Built-in reducer
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "ADD_TO_BASKET":
-      return {
-        ...state,
-        basket: [...state.basket, action.item],
-      };
-    case "REMOVE_FROM_BASKET":
-      return {
-        ...state,
-        basket: state.basket.filter((item) => item.id !== action.id),
-      };
-    default:
-      return state;
-  }
-};
-
 export const DataProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(reducer, initialState);
+
+  console.log("DataProvider - Current state:", state);
+  console.log("DataProvider - Dispatch function:", typeof dispatch);
+
   return (
-    <DataContext.Provider value={useReducer(reducer, initialState)}>
+    <DataContext.Provider value={[state, dispatch]}>
       {children}
     </DataContext.Provider>
   );

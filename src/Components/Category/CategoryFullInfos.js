@@ -5,7 +5,7 @@ export const categoryInfo = [
     name: "electronics",
     title: "Electronics",
     description: "Discover the latest in technology and electronics",
-    image: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg", // iPhone 12
+    image: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg",
     productCount: 6,
   },
   {
@@ -13,7 +13,7 @@ export const categoryInfo = [
     name: "jewelery",
     title: "Jewelry",
     description: "Beautiful jewelry and accessories for every occasion",
-    image: "https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg", // Gold necklace
+    image: "https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg",
     productCount: 4,
   },
   {
@@ -21,7 +21,7 @@ export const categoryInfo = [
     name: "men's clothing",
     title: "Men's Clothing",
     description: "Stylish and comfortable clothing for men",
-    image: "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg", // Men's shirt
+    image: "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
     productCount: 4,
   },
   {
@@ -29,7 +29,7 @@ export const categoryInfo = [
     name: "women's clothing",
     title: "Women's Clothing",
     description: "Fashionable clothing and accessories for women",
-    image: "https://fakestoreapi.com/img/71HblAHs5xL._AC_UY879_-2.jpg", // Women's jacket
+    image: "https://fakestoreapi.com/img/71HblAHs5xL._AC_UY879_-2.jpg",
     productCount: 6,
   },
 ];

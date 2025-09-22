@@ -1,53 +1,92 @@
-import React, { useContext, useState } from "react";
-import Rating from "@mui/material/Rating";
-import numeral from "numeral";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import classes from "./Product.module.css";
-import CurrencyFormat from "../CurrencyFormat/CurrencyFormat";
 import { DataContext } from "../DataProvider/DataProvider";
 import { ActionType } from "../Utility/ActionType";
+import "./ProductCard.css";
 
-function ProductCard({ product, flex }) {
+function ProductCard({
+  product,
+  showAddButton = true,
+  showDescription = false,
+  isCartItem = false,
+  onRemove,
+  onIncrement,
+  onDecrement,
+  quantity = 1,
+}) {
+  // Get product details
   const { image, id, title, rating, price } = product;
-  const [currentRating, setCurrentRating] = useState(rating?.rate || 0);
 
+  // Get cart context
   const [state, dispatch] = useContext(DataContext);
 
-  const addItemToCart = () => {
+  console.log("ProductCard - Current state:", state);
+  console.log("ProductCard - DataContext available:", !!DataContext);
+  console.log("ProductCard - Dispatch function:", typeof dispatch);
+
+  // Add product to cart
+  const addToCart = () => {
+    console.log("Adding to cart:", { image, id, title, rating, price });
     dispatch({
-      type: ActionType.AddToBascket,
+      type: ActionType.AddToBasket,
       item: { image, id, title, rating, price },
     });
+    console.log("Dispatch called, current state:", state);
+    // Alert removed - cart count will show the update instead
   };
+
   return (
-    <div
-      className={`${classes.card_container} ${
-        flex ? classes.Product_flexed : ""
-      }`}
-    >
-      <Link to={`/product/${id}`} className={classes.image_link}>
-        <div className={classes.image_wrap}>
-          <img src={image} alt="" className={classes.img_container} />
-        </div>
+    <div className={`product-card ${isCartItem ? "cart-item" : ""}`}>
+      {/* Product Image */}
+      <Link to={`/product/${id}`} className="product-link">
+        <img src={image} alt={title} className="product-image" />
       </Link>
-      <div className={classes.card_content}>
-        <h4>{title}</h4>
-        <div className={classes.rating}>
-          <Rating
-            value={currentRating}
-            precision={0.1}
-            onChange={(event, newValue) => {
-              if (typeof newValue === "number") setCurrentRating(newValue);
-            }}
-          />
-          <small>({rating?.count ?? 0})</small>
+
+      {/* Product Info */}
+      <div className="product-info">
+        <h3 className="product-title">{title}</h3>
+
+        {/* Description - only show if requested */}
+        {showDescription && (
+          <p className="product-description">
+            This is a great product with excellent quality and features.
+          </p>
+        )}
+
+        {/* Rating */}
+        <div className="product-rating">
+          <span>⭐ {rating?.rate || 0}</span>
+          <span>({rating?.count || 0} reviews)</span>
         </div>
-        <div className={classes.price_section}>
-          <CurrencyFormat amount={price} />
-        </div>
-        <button className={classes.button} onClick={addItemToCart}>
-          Add to Cart
-        </button>
+
+        {/* Price */}
+        <div className="product-price">${price}</div>
+
+        {/* Quantity controls for cart items */}
+        {isCartItem && (
+          <div className="quantity-controls">
+            <button onClick={() => onDecrement && onDecrement(product)}>
+              -
+            </button>
+            <span>Qty: {quantity}</span>
+            <button onClick={() => onIncrement && onIncrement(product)}>
+              +
+            </button>
+            <button
+              onClick={() => onRemove && onRemove(product)}
+              className="remove-btn"
+            >
+              Remove
+            </button>
+          </div>
+        )}
+
+        {/* Add to Cart Button - only show if not in cart */}
+        {showAddButton && !isCartItem && (
+          <button className="add-to-cart-btn" onClick={addToCart}>
+            Add to Cart
+          </button>
+        )}
       </div>
     </div>
   );
