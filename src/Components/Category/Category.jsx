@@ -1,38 +1,46 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";  
+import { useNavigate } from "react-router-dom";
 import { categoryInfo } from "./CategoryFullInfos";
 import classes from "./Category.module.css";
 
-// Clean card component using CSS modules
+// Clean category card component using CSS modules
 const CategoryCard = ({ data, onClick }) => {
+  const handleImageError = (e) => {
+    console.log("Image failed to load:", data.image);
+    e.target.style.display = "none";
+  };
+
   return (
     <div className={classes.categoryCard} onClick={onClick}>
-      <img src={data.image} alt={data.title} className={classes.productImage} />
-      <h3 className={classes.productTitle}>{data.title}</h3>
-      <p className={classes.productPrice}>${data.price}</p>
-      <p className={classes.productCategory}>{data.category}</p>
-      {data.rating && (
-        <div className={classes.productRating}>
-          <span className={classes.ratingStars}>
-            {"★".repeat(Math.floor(data.rating.rate))}
-            {"☆".repeat(5 - Math.floor(data.rating.rate))}
-          </span>
-          <span>({data.rating.count})</span>
-        </div>
-      )}
+      <img
+        src={data.image}
+        alt={data.title}
+        className={classes.categoryImage}
+        onError={handleImageError}
+      />
+      <h3 className={classes.categoryTitle}>{data.title}</h3>
+      <p className={classes.categoryDescription}>{data.description}</p>
+      <div className={classes.categoryFooter}>
+        <span className={classes.productCount}>
+          {data.productCount} products
+        </span>
+        <span className={classes.shopNow}>Shop Now →</span>
+      </div>
     </div>
   );
 };
 
 export default function Category() {
-  const navigate = useNavigate();  // ← ADD THIS LINE
+  const navigate = useNavigate();
 
-  const handleCategoryClick = (categoryData) => {  // ← ADD THIS FUNCTION
-    navigate(`/category/${categoryData.category}`);
+  const handleCategoryClick = (categoryData) => {
+    console.log("Navigating to category:", categoryData.name);
+    console.log("Full URL:", `/category/${categoryData.name}`);
+    navigate(`/category/${categoryData.name}`);
   };
   return (
     <section className={classes.section}>
-      {/* <h2 className={classes.sectionTitle}>Our Categories</h2> */}
+      <h2 className={classes.sectionTitle}>Our Categories</h2>
 
       <section className={classes.catagorySection}>
         {/* {categoryInfo.map((info, index) => (
@@ -48,3 +56,4 @@ export default function Category() {
     </section>
   );
 }
+// export default Category;

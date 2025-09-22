@@ -90,8 +90,7 @@
   gap: 15px;
   font-size: 14px;
   color: #666;
-} 
-
+}
 
 /* Main container section */
 .section {
@@ -124,72 +123,86 @@
 .categoryCard {
   padding: 20px;
   background-color: white;
-  border-radius: 28px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  min-height: 200px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  min-height: 250px;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   cursor: pointer;
   border: 1px solid #e0e0e0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .categoryCard:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* Product image */
-.productImage {
+/* Category image */
+.categoryImage {
   width: 100%;
   height: 150px;
   object-fit: contain;
-  margin-bottom: 10px;
+  margin-bottom: 15px;
   border-radius: 4px;
+  background-color: #f8f9fa;
+  padding: 10px;
+  display: block;
+  max-width: 100%;
+  height: auto;
+  min-height: 120px;
 }
 
-/* Product title */
-.productTitle {
-  font-size: 16px;
+/* Category title */
+.categoryTitle {
+  font-size: 18px;
   font-weight: bold;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   color: #333;
+  line-height: 1.3;
+  text-align: center;
+}
+
+/* Category description */
+.categoryDescription {
+  font-size: 14px;
+  color: #666;
   line-height: 1.4;
+  margin-bottom: 15px;
+  text-align: center;
   display: -webkit-box;
   -webkit-line-clamp: 2;
+  line-clamp: 2;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
 
-/* Product price */
-.productPrice {
-  font-size: 18px;
-  color: #e47911;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-/* Product category */
-.productCategory {
-  font-size: 14px;
-  color: #666;
-  text-transform: capitalize;
-  background-color: #f0f0f0;
-  padding: 4px 8px;
-  border-radius: 4px;
-  display: inline-block;
-}
-
-/* Rating section */
-.productRating {
+/* Category footer */
+.categoryFooter {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 5px;
-  margin-top: 8px;
-  font-size: 14px;
-  color: #666;
+  margin-top: auto;
+  padding-top: 10px;
+  width: 100%;
 }
 
-.ratingStars {
-  color: #ffa500;
+/* Product count */
+.productCount {
+  font-size: 12px;
+  color: #666;
+  font-weight: 500;
+}
+
+/* Shop now text */
+.shopNow {
+  font-size: 12px;
+  color: #007185;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 }
 
 /* Responsive adjustments */
@@ -204,12 +217,12 @@
   .section {
     padding: 1rem 0.5rem;
   }
-  
+
   .sectionTitle {
     font-size: 1.5rem;
     margin-bottom: 1.5rem;
   }
-  
+
   .catagorySection {
     grid-template-columns: repeat(2, 1fr);
     gap: 1.5rem;
@@ -221,7 +234,7 @@
     min-height: 180px;
   }
 
-  .productImage {
+  .categoryImage {
     height: 120px;
   }
 }
@@ -236,11 +249,11 @@
     padding: 15px;
   }
 
-  .productTitle {
-    font-size: 14px;
+  .categoryTitle {
+    font-size: 16px;
   }
 
-  .productPrice {
-    font-size: 16px;
+  .categoryDescription {
+    font-size: 13px;
   }
 }

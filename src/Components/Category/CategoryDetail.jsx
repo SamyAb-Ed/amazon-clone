@@ -9,8 +9,7 @@ function CategoryDetail() {
   // Find the category by name (convert URL param to match category names)
   const category = categoryInfo.find(
     (cat) =>
-      cat.category.toLowerCase().replace(/'/g, "") ===
-      categoryName?.toLowerCase()
+      cat.name?.toLowerCase().replace(/'/g, "") === categoryName?.toLowerCase()
   );
 
   if (!category) {
@@ -24,16 +23,14 @@ function CategoryDetail() {
 
   return (
     <div className={classes.category_detail}>
-      <h2>{category.category}</h2>
+      <h2>{category.title}</h2>
       <div className={classes.category_content}>
         <img src={category.image} alt={category.title} />
         <div className={classes.category_info}>
           <h3>{category.title}</h3>
-          <p className={classes.price}>${category.price}</p>
           <p className={classes.description}>{category.description}</p>
-          <div className={classes.rating}>
-            <span>Rating: {category.rating.rate}/5</span>
-            <span>({category.rating.count} reviews)</span>
+          <div className={classes.productCount}>
+            <span>{category.productCount} products available</span>
           </div>
         </div>
       </div>

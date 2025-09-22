@@ -1,8 +1,7 @@
-
 import React, { useContext, useState } from "react";
 import Rating from "@mui/material/Rating";
 import numeral from "numeral";
-import { Link } from "react-router-dom"; 
+import { Link } from "react-router-dom";
 import classes from "./Product.module.css";
 import CurrencyFormat from "../CurrencyFormat/CurrencyFormat";
 import { DataContext } from "../DataProvider/DataProvider";
@@ -11,14 +10,14 @@ import { ActionType } from "../Utility/ActionType";
 function ProductCard({ product, flex }) {
   const { image, id, title, rating, price } = product;
   const [currentRating, setCurrentRating] = useState(rating?.rate || 0);
-  
-  const [state, dispatch] = useContext(DataContext)
+
+  const [state, dispatch] = useContext(DataContext);
 
   const addItemToCart = () => {
     dispatch({
-      type:ActionType.AddToBascket,
-      item: {image, id, title, rating, price},
-    })
+      type: ActionType.AddToBascket,
+      item: { image, id, title, rating, price },
+    });
   };
   return (
     <div
@@ -26,10 +25,12 @@ function ProductCard({ product, flex }) {
         flex ? classes.Product_flexed : ""
       }`}
     >
-      <Link to={`/products/${id}`} className={classes.image_link}>
-        <img src={image} alt="" className={classes.img_container} />
+      <Link to={`/product/${id}`} className={classes.image_link}>
+        <div className={classes.image_wrap}>
+          <img src={image} alt="" className={classes.img_container} />
+        </div>
       </Link>
-      <div>
+      <div className={classes.card_content}>
         <h4>{title}</h4>
         <div className={classes.rating}>
           <Rating
@@ -41,12 +42,15 @@ function ProductCard({ product, flex }) {
           />
           <small>({rating?.count ?? 0})</small>
         </div>
-        <CurrencyFormat amount={price} />
-
-        <button className={classes.button}>Add to Cart</button>
+        <div className={classes.price_section}>
+          <CurrencyFormat amount={price} />
+        </div>
+        <button className={classes.button} onClick={addItemToCart}>
+          Add to Cart
+        </button>
       </div>
     </div>
   );
-};
+}
 
-export default ProductCard
+export default ProductCard;

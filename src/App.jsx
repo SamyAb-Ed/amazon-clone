@@ -27,7 +27,7 @@
 //             </>
 //           }
 //         />
-//         <Route path="/category/:categoryName" element={<CategoryDetail />} />
+//         <Route path="/category/:categoryName" element={<Results />} />
 //         <Route
 //           path="/cart"
 //           element={
@@ -49,8 +49,6 @@
 
 // export default App;
 
-
-
 import { useState } from "react";
 import Header from "./Components/Header/Header";
 import Carousel from "./Components/Carousel/Carousel";
@@ -61,6 +59,7 @@ import Cart from "./Pages/Cart/Cart";
 import ProductDetail from "./Pages/ProductDetail/ProductDetail";
 import Orders from "./Pages/Orders/Orders";
 import SignUp from "./Pages/Auth/SignUp";
+import Results from "./Pages/Results/Results";
 import { Routes, Route } from "react-router-dom";
 import { DataProvider } from "./Components/DataProvider/DataProvider"; // Add this import
 
@@ -68,7 +67,9 @@ function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <DataProvider> {/* Wrap everything with DataProvider */}
+    <DataProvider>
+      {" "}
+      {/* Wrap everything with DataProvider */}
       <Header />
       <Routes>
         <Route
@@ -81,7 +82,7 @@ function App() {
             </>
           }
         />
-        <Route path="/category/:categoryName" element={<CategoryDetail />} />
+        <Route path="/category/:categoryName" element={<Results />} />
         <Route
           path="/cart"
           element={
@@ -95,7 +96,7 @@ function App() {
         <Route path="/orders" element={<Orders />} />
         <Route path="/login" element={<SignUp />} />
       </Routes>
-    </DataProvider> 
+    </DataProvider>
   );
 }
 
