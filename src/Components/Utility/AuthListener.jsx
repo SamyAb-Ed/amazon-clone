@@ -1,5 +1,6 @@
 import { useEffect, useContext } from "react";
-import { auth } from "./MockAuth";
+import { auth } from "./Firebase";
+import { onAuthStateChanged } from "firebase/auth";
 import { DataContext } from "../DataProvider/DataProvider";
 import { ActionType } from "./ActionType";
 
@@ -10,7 +11,7 @@ const AuthListener = ({ children }) => {
   console.log("AuthListener - State:", state);
 
   useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
       console.log("AuthListener - Auth state changed:", user);
       if (user) {
         // User is signed in

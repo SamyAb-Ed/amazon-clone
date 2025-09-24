@@ -5,8 +5,10 @@ import Category from "./Components/Category/Category";
 import Product from "./Components/Product/Product";
 import CategoryDetail from "./Components/Category/CategoryDetail";
 import Cart from "./Pages/Cart/Cart";
+import Payment from "./Pages/Payment/Payment";
 import ProductDetail from "./Pages/ProductDetail/ProductDetail";
 import Orders from "./Pages/Orders/Orders";
+import OrderConfirmation from "./Pages/OrderConfirmation/OrderConfirmation";
 import Auth from "./Pages/Auth/Auth";
 import Results from "./Pages/Results/Results";
 import { Routes, Route } from "react-router-dom";
@@ -33,8 +35,10 @@ function App() {
           />
           <Route path="/category/:categoryName" element={<Results />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/payments" element={<Payment />} />
           <Route path="/product/:ProductId" element={<ProductDetail />} />
           <Route path="/orders" element={<Orders />} />
+          <Route path="/orders/:orderId" element={<OrderConfirmation />} />
           <Route path="/auth" element={<Auth />} />
         </Routes>
       </AuthListener>

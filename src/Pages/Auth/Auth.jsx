@@ -1,10 +1,15 @@
 import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import classes from "./Auth.module.css";
 import { DataContext } from "../../Components/DataProvider/DataProvider";
 import { ActionType } from "../../Components/Utility/ActionType";
 import LayOut from "../../Components/LayOut/LayOut";
-import { auth } from "../../Components/Utility/MockAuth";
+import { auth } from "../../Components/Utility/Firebase";
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  updateProfile,
+} from "firebase/auth";
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -19,6 +24,7 @@ const Auth = () => {
 
   const [state, dispatch] = useContext(DataContext);
   const navigate = useNavigate();
+  const navStateData = useLocation();
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -78,8 +84,9 @@ const Auth = () => {
 
     try {
       if (isLogin) {
-        // Sign in with Firebase
-        const userCredential = await auth.signInWithEmailAndPassword(
+        // Sign in with Firebase v9+
+        const userCredential = await signInWithEmailAndPassword(
+          auth,
           formData.email,
           formData.password
         );
@@ -95,8 +102,9 @@ const Auth = () => {
         dispatch({ type: ActionType.SetUser, user: userData });
         navigate("/");
       } else {
-        // Create account with Firebase
-        const userCredential = await auth.createUserWithEmailAndPassword(
+        // Create account with Firebase v9+
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
           formData.email,
           formData.password
         );
@@ -104,7 +112,7 @@ const Auth = () => {
         const user = userCredential.user;
 
         // Update the user's display name
-        await user.updateProfile({
+        await updateProfile(user, {
           displayName: formData.name,
         });
 
