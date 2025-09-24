@@ -1,9 +1,118 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import "./Payment.css";
 import LayOut from "../../Components/LayOut/LayOut";
 import { DataContext } from "../../Components/DataProvider/DataProvider";
 import ProductCard from "../../Components/Product/ProductCard";
 import { ActionType } from "../../Components/Utility/ActionType";
+import { loadStripe } from "@stripe/stripe-js";
+import {
+  Elements,
+  CardElement,
+  useStripe,
+  useElements,
+} from "@stripe/react-stripe-js";
+
+// Stripe configuration
+const stripePromise = loadStripe(
+  process.env.REACT_APP_STRIPE_PUBLISHABLE_KEY ||
+    "pk_test_your_publishable_key_here"
+);
+
+// Payment form component
+function PaymentForm({ totalPrice, basket, dispatch }) {
+  const stripe = useStripe();
+  const elements = useElements();
+  const [processing, setProcessing] = useState(false);
+  const [error, setError] = useState(null);
+  const [succeeded, setSucceeded] = useState(false);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    if (!stripe || !elements) {
+      return;
+    }
+
+    setProcessing(true);
+    setError(null);
+
+    try {
+      // Create payment intent on your server
+      const response = await fetch(
+        `http://localhost:5001/clone-aa27c/us-central1/api/payments/create?total=${Math.round(
+          totalPrice * 100
+        )}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      const { client_secret } = await response.json();
+
+      // Confirm the payment
+      const { error: stripeError, paymentIntent } =
+        await stripe.confirmCardPayment(client_secret, {
+          payment_method: {
+            card: elements.getElement(CardElement),
+          },
+        });
+
+      if (stripeError) {
+        setError(stripeError.message);
+        setProcessing(false);
+      } else if (paymentIntent.status === "succeeded") {
+        setSucceeded(true);
+        setError(null);
+        setProcessing(false);
+
+        // Clear the cart after successful payment
+        basket.forEach((item) => {
+          dispatch({ type: ActionType.RemoveFromBasket, item });
+        });
+      }
+    } catch (err) {
+      setError("An error occurred while processing your payment.");
+      setProcessing(false);
+    }
+  };
+
+  return (
+    <form onSubmit={handleSubmit} className="payment_form">
+      <h3>Payment Information</h3>
+
+      <div className="form_group">
+        <label>Card Details:</label>
+        <CardElement
+          options={{
+            style: {
+              base: {
+                fontSize: "16px",
+                color: "#424770",
+                "::placeholder": {
+                  color: "#aab7c4",
+                },
+              },
+            },
+          }}
+        />
+      </div>
+
+      {error && <div className="error_message">{error}</div>}
+      {succeeded && <div className="success_message">Payment successful!</div>}
+
+      <button
+        type="submit"
+        disabled={!stripe || processing || basket?.length === 0}
+        className="place_order_btn"
+      >
+        {processing ? "Processing..." : `Pay $${totalPrice.toFixed(2)}`}
+      </button>
+    </form>
+  );
+}
 
 function Payment() {
   const [state, dispatch] = useContext(DataContext);
@@ -14,14 +123,6 @@ function Payment() {
     basket?.reduce((amount, item) => {
       return amount + item.price * (item.quantity || 1);
     }, 0) || 0;
-
-  const handlePlaceOrder = () => {
-    alert(`Order placed successfully! Total: $${totalPrice.toFixed(2)}`);
-    // Clear the cart after successful order
-    basket.forEach((item) => {
-      dispatch({ type: ActionType.RemoveFromBasket, item });
-    });
-  };
 
   return (
     <LayOut>
@@ -58,41 +159,14 @@ function Payment() {
             )}
           </div>
 
-          {/* Payment Form */}
-          <div className="payment_form">
-            <h3>Payment Information</h3>
-            <form>
-              <div className="form_group">
-                <label>Card Number:</label>
-                <input type="text" placeholder="1234 5678 9012 3456" />
-              </div>
-
-              <div className="form_row">
-                <div className="form_group">
-                  <label>Expiry Date:</label>
-                  <input type="text" placeholder="MM/YY" />
-                </div>
-                <div className="form_group">
-                  <label>CVV:</label>
-                  <input type="text" placeholder="123" />
-                </div>
-              </div>
-
-              <div className="form_group">
-                <label>Name on Card:</label>
-                <input type="text" placeholder="John Doe" />
-              </div>
-
-              <button
-                type="button"
-                onClick={handlePlaceOrder}
-                className="place_order_btn"
-                disabled={basket?.length === 0}
-              >
-                Place Order - ${totalPrice.toFixed(2)}
-              </button>
-            </form>
-          </div>
+          {/* Payment Form with Stripe */}
+          <Elements stripe={stripePromise}>
+            <PaymentForm
+              totalPrice={totalPrice}
+              basket={basket}
+              dispatch={dispatch}
+            />
+          </Elements>
         </div>
       </div>
     </LayOut>

@@ -50,6 +50,16 @@ export const reducer = (state, action) => {
         }
       }
       return state;
+    case ActionType.SetUser:
+      return {
+        ...state,
+        user: action.user,
+      };
+    case ActionType.SignOut:
+      return {
+        ...state,
+        user: null,
+      };
     default:
       return state;
   }

@@ -5,7 +5,8 @@ export const categoryInfo = [
     name: "electronics",
     title: "Electronics",
     description: "Discover the latest in technology and electronics",
-    image: "https://fakestoreapi.com/img/61sbMiUnoGL._AC_UL640_QL65_ML3_.jpg",
+    imgLink: "https://fakestoreapi.com/img/81Zt42ioCgL._AC_SX679_t.png",
+    image: "https://fakestoreapi.com/img/81Zt42ioCgL._AC_SX679_t.png",
     productCount: 6,
   },
   {
@@ -13,7 +14,9 @@ export const categoryInfo = [
     name: "jewelery",
     title: "Jewelry",
     description: "Beautiful jewelry and accessories for every occasion",
-    image: "https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_.jpg",
+    imgLink:
+      "https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_t.png",
+    image: "https://fakestoreapi.com/img/71pWzhdJNwL._AC_UL640_QL65_ML3_t.png",
     productCount: 4,
   },
   {
@@ -21,7 +24,8 @@ export const categoryInfo = [
     name: "men's clothing",
     title: "Men's Clothing",
     description: "Stylish and comfortable clothing for men",
-    image: "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_.jpg",
+    imgLink: "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_t.png",
+    image: "https://fakestoreapi.com/img/71li-ujtlUL._AC_UX679_t.png",
     productCount: 4,
   },
   {
@@ -29,7 +33,8 @@ export const categoryInfo = [
     name: "women's clothing",
     title: "Women's Clothing",
     description: "Fashionable clothing and accessories for women",
-    image: "https://fakestoreapi.com/img/71HblAHs5xL._AC_UY879_-2.jpg",
+    imgLink: "https://fakestoreapi.com/img/71HblAHs5xL._AC_UY879_-2t.png",
+    image: "https://fakestoreapi.com/img/71HblAHs5xL._AC_UY879_-2t.png",
     productCount: 6,
   },
 ];

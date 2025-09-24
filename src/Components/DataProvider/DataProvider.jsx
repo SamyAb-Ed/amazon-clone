@@ -20,6 +20,7 @@ export const DataProvider = ({ children }) => {
 
   console.log("DataProvider - Current state:", state);
   console.log("DataProvider - Dispatch function:", typeof dispatch);
+  console.log("DataProvider - Context value:", [state, dispatch]);
 
   return (
     <DataContext.Provider value={[state, dispatch]}>

@@ -1,16 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
 import classes from "./Header.module.css";
 import { Link } from "react-router-dom";
 import { FcSearch } from "react-icons/fc";
 import { SlLocationPin } from "react-icons/sl";
 import { BiCart } from "react-icons/bi";
 import LowerHeader from "./LowerHeader";
-import { useContext } from "react";
 import { DataContext } from "../DataProvider/DataProvider";
+import { ActionType } from "../Utility/ActionType";
+import { auth } from "../Utility/MockAuth";
 
 const Header = () => {
   const [state, dispatch] = useContext(DataContext);
-  const { basket } = state;
+  const { basket, user } = state;
+
+  const handleSignOut = async () => {
+    try {
+      await auth.signOut();
+      dispatch({ type: ActionType.SignOut });
+    } catch (error) {
+      console.error("Error signing out:", error);
+    }
+  };
 
   console.log("Header - Current basket:", basket);
   console.log("Header - Basket length:", basket?.length);
@@ -60,12 +70,24 @@ const Header = () => {
           </div>
 
           {/* Account Links */}
-          <Link to="/login">
-            <div>
-              <p> Sign in</p>
-              <span>Account & Lists</span>
+          {user ? (
+            <div className={classes.userMenu}>
+              <div>
+                <p>Hello, {user.name}</p>
+                <span>Account & Lists</span>
+              </div>
+              <button onClick={handleSignOut} className={classes.signOutBtn}>
+                Sign Out
+              </button>
             </div>
-          </Link>
+          ) : (
+            <Link to="/auth">
+              <div>
+                <p>Hello, Sign in</p>
+                <span>Account & Lists</span>
+              </div>
+            </Link>
+          )}
 
           <Link to="/orders">
             <p>Returns</p>

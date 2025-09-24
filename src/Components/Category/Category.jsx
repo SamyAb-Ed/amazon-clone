@@ -8,12 +8,22 @@ function CategoryCard({ category, onCategoryClick }) {
   return (
     <div className="category-card" onClick={() => onCategoryClick(category)}>
       <img
-        src={category.image}
+        src={category.image || category.imgLink}
         alt={category.title}
         className="category-image"
         onError={(e) => {
-          e.target.style.display = "none";
-          console.log("Image failed to load:", category.image);
+          console.log(
+            "Image failed to load:",
+            category.image || category.imgLink
+          );
+          // Try fallback image
+          if (
+            e.target.src !== "https://via.placeholder.com/300x200?text=No+Image"
+          ) {
+            e.target.src = "https://via.placeholder.com/300x200?text=No+Image";
+          } else {
+            e.target.style.display = "none";
+          }
         }}
       />
       <h3 className="category-title">{category.title}</h3>
@@ -35,18 +45,27 @@ function Category() {
     navigate(`/category/${category.name}`);
   };
 
+  // Debug: Log category data
+  console.log("Category data:", categoryInfo);
+
   return (
     <div className="category-container">
       <h2 className="category-title-main">Our Categories</h2>
 
       <div className="category-grid">
-        {categoryInfo.map((category) => (
-          <CategoryCard
-            key={category.id}
-            category={category}
-            onCategoryClick={handleCategoryClick}
-          />
-        ))}
+        {categoryInfo.map((category) => {
+          console.log(
+            `Rendering category ${category.title} with image:`,
+            category.image || category.imgLink
+          );
+          return (
+            <CategoryCard
+              key={category.id}
+              category={category}
+              onCategoryClick={handleCategoryClick}
+            />
+          );
+        })}
       </div>
     </div>
   );

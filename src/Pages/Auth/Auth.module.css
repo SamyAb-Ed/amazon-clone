@@ -1,0 +1,205 @@
+.authContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  padding: 20px;
+  background-color: #f8f9fa;
+}
+
+.authCard {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  padding: 25px;
+  width: 100%;
+  max-width: 320px;
+  border: 1px solid #ddd;
+}
+
+.authHeader {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.logoContainer {
+  margin-bottom: 12px;
+}
+
+.amazonLogo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logoImage {
+  width: 100px;
+  height: auto;
+  max-width: 100%;
+}
+
+.authHeader h2 {
+  color: #333;
+  margin: 0 0 8px 0;
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.subtitle {
+  color: #666;
+  margin: 0;
+  font-size: 14px;
+}
+
+.authForm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.formGroup label {
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+.formGroup input {
+  padding: 12px;
+  border: 1px solid #a6a6a6;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: border-color 0.2s ease;
+}
+
+.formGroup input:focus {
+  outline: none;
+  border-color: #007185;
+  box-shadow: 0 0 0 3px rgba(0, 113, 133, 0.1);
+}
+
+.inputError {
+  border-color: #e74c3c !important;
+  box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.1) !important;
+}
+
+.fieldError {
+  color: #e74c3c;
+  font-size: 12px;
+  margin-top: 2px;
+}
+
+.errorMessage {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 12px;
+  border-radius: 4px;
+  border: 1px solid #f5c6cb;
+  font-size: 14px;
+  text-align: center;
+}
+
+.submitButton {
+  background: linear-gradient(to bottom, #f7dfa5, #f0c14b);
+  border: 1px solid #a88734;
+  border-radius: 4px;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #111;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 10px;
+}
+
+.submitButton:hover:not(:disabled) {
+  background: linear-gradient(to bottom, #f5d078, #eeb933);
+  border-color: #9c7e31;
+}
+
+.submitButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.spinnerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid #333;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.authFooter {
+  margin-top: 20px;
+  text-align: center;
+  padding-top: 12px;
+  border-top: 1px solid #e7e7e7;
+}
+
+.authFooter p {
+  margin: 0;
+  color: #333;
+  font-size: 14px;
+}
+
+.toggleButton {
+  background: none;
+  border: none;
+  color: #0066c0;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: underline;
+  margin-left: 5px;
+  padding: 0;
+}
+
+.toggleButton:hover {
+  color: #c7511f;
+  text-decoration: none;
+}
+
+.termsText {
+  font-size: 12px;
+  color: #666;
+  margin: 0 0 15px 0;
+  line-height: 1.4;
+  text-align: center;
+}
+
+/* Responsive Design */
+@media screen and (max-width: 480px) {
+  .authContainer {
+    padding: 10px;
+  }
+
+  .authCard {
+    padding: 20px;
+  }
+
+  .authHeader h2 {
+    font-size: 24px;
+  }
+}
