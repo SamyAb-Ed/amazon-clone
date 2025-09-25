@@ -59,6 +59,12 @@ export const reducer = (state, action) => {
       return {
         ...state,
         user: null,
+        basket: [], // Clear basket on sign out
+      };
+    case "CLEAR_BASKET":
+      return {
+        ...state,
+        basket: [],
       };
     default:
       return state;

@@ -13,35 +13,32 @@ import Auth from "./Pages/Auth/Auth";
 import Results from "./Pages/Results/Results";
 import { Routes, Route } from "react-router-dom";
 import { DataProvider } from "./Components/DataProvider/DataProvider";
-import AuthListener from "./Components/Utility/AuthListener";
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
     <DataProvider>
-      <AuthListener>
-        <Header />
-        <Routes>
-          <Route
-            path="/"
-            element={
-              <>
-                <Carousel />
-                <Category />
-                <Product />
-              </>
-            }
-          />
-          <Route path="/category/:categoryName" element={<Results />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/payments" element={<Payment />} />
-          <Route path="/product/:ProductId" element={<ProductDetail />} />
-          <Route path="/orders" element={<Orders />} />
-          <Route path="/orders/:orderId" element={<OrderConfirmation />} />
-          <Route path="/auth" element={<Auth />} />
-        </Routes>
-      </AuthListener>
+      <Header />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <>
+              <Carousel />
+              <Category />
+              <Product />
+            </>
+          }
+        />
+        <Route path="/category/:categoryName" element={<Results />} />
+        <Route path="/cart" element={<Cart />} />
+        <Route path="/payments" element={<Payment />} />
+        <Route path="/product/:ProductId" element={<ProductDetail />} />
+        <Route path="/orders" element={<Orders />} />
+        <Route path="/orders/:orderId" element={<OrderConfirmation />} />
+        <Route path="/auth" element={<Auth />} />
+      </Routes>
     </DataProvider>
   );
 }
