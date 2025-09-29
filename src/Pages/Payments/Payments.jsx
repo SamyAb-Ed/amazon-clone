@@ -11,7 +11,8 @@ import { PaymentService } from "../../Utility/paymentService";
 import { loadStripe } from "@stripe/stripe-js";
 
 const stripePromise = loadStripe(
-  "pk_test_51SAjX1QbeOMfJMMarYRJkX07hX6lHCKo9UnpevHGjtHgcBVtqKBaKWH9zysYnl92YWaE5ZexwA08nsMCcxy6Vvz200qdkg1tip"
+  import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY ||
+    "pk_test_YOUR_STRIPE_PUBLISHABLE_KEY_HERE"
 );
 
 const Payments = () => {

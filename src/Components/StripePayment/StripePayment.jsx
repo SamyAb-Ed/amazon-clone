@@ -13,7 +13,7 @@ import classes from "./StripePayment.module.css";
 // Initialize Stripe with TEST keys only
 const stripePromise = loadStripe(
   import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY ||
-    "pk_test_51SAjX1QbeOMfJMMarYRJkX07hX6lHCKo9UnpevHGjtHgcBVtqKBaKWH9zysYnl92YWaE5ZexwA08nsMCcxy6Vvz200qdkg1tip"
+    "pk_test_YOUR_STRIPE_PUBLISHABLE_KEY_HERE"
 ).catch((error) => {
   console.warn("Stripe failed to load:", error);
   return null;
