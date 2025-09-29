@@ -1,0 +1,275 @@
+.fixed {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+.header_container {
+  background-color: black;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  color: aliceblue;
+  height: 70px;
+}
+
+.logo_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 250px;
+}
+.logo_container img {
+  width: 80%;
+  padding-top: 5px;
+  margin-left: 20px;
+  vertical-align: middle;
+}
+
+.delivery {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 3px;
+  font-weight: bold;
+  padding: 5px;
+}
+.delivery p {
+  font-size: 10px;
+}
+/* .search{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 100%;
+    flex: 1;
+}
+.search select,
+.search input{
+padding: 10PX;
+font-weight: bold;
+outline: 1PX solid white;
+}
+
+.search select{
+    border: none;
+}
+.search input{
+    border: 7px;
+    background-color: yellow;
+    color: black;
+}
+
+.search svg:hover{
+    background-color: blanchedalmond;
+}
+.search:focus-within{
+    border: 2px solid rgb(235, 161, 173);
+} */
+
+.search {
+  display: flex;
+  align-items: center;
+  /* don't center children; let input take space */
+  justify-content: flex-start;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 100%;
+  min-width: 280px; /* prevent collapsing to zero */
+  background: #fff; /* make the whole control visible on dark header */
+  flex: 1;
+}
+
+.search select {
+  height: 40px;
+  border: none;
+  background: #f3f3f3;
+  padding: 0 8px;
+  /* fixed width so input can flex */
+  flex: 0 0 70px;
+}
+
+.search input {
+  /* make it expand */
+  flex: 1;
+  min-width: 0;
+  height: 40px;
+  padding: 0 12px;
+  background: transparent;
+  color: #111;
+  border: none; /* remove the ineffective border:7px */
+  outline: none; /* you can keep outline if you like */
+}
+
+.searchBtn {
+  height: 40px;
+  width: 48px;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #febd69;
+}
+
+.searchBtn:hover {
+  background: #ffd08a;
+}
+
+/* optional focus ring on whole control */
+.search:focus-within {
+  outline: 2px solid rgb(235, 161, 173);
+  outline-offset: 2px;
+}
+.order_container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 450px;
+  gap: 10px;
+}
+.order_container a {
+  text-decoration: none;
+  color: #fff;
+}
+.order_container p {
+  font-size: 10px;
+}
+.language {
+  width: 100px;
+  display: flex;
+  padding: 10px;
+}
+.language select {
+  background-color: #1a1a1a;
+  border: none;
+  color: #f3f3f3;
+}
+.language img {
+  width: 40%;
+}
+.cart {
+  position: relative;
+}
+.cart span {
+  position: absolute;
+  font-weight: bold;
+  top: -6px;
+  font-size: 20px;
+  background-color: #1a1a1a;
+  left: 14px;
+  color: orange;
+}
+.order_container a:hover,
+.delivery:hover,
+.logo_container a:hover {
+  border: 1px solid white;
+  border-radius: 3px;
+}
+
+/* User Menu Styles */
+.userMenu {
+  position: relative;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.userMenu:hover {
+  border: 1px solid white;
+  border-radius: 3px;
+}
+
+.userMenu p {
+  font-size: 12px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.userMenu span {
+  font-size: 10px;
+  display: block;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  min-width: 150px;
+  z-index: 1000;
+  display: none;
+  flex-direction: column;
+}
+
+.userMenu:hover .dropdown {
+  display: flex;
+}
+
+.dropdown a {
+  color: #111;
+  text-decoration: none;
+  padding: 10px 15px;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+}
+
+.dropdown a:hover {
+  background: #f5f5f5;
+}
+
+.dropdown button {
+  background: none;
+  border: none;
+  color: #111;
+  padding: 10px 15px;
+  cursor: pointer;
+  text-align: left;
+  font-size: 14px;
+  width: 100%;
+}
+
+.dropdown button:hover {
+  background: #f5f5f5;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.Lower_container {
+  background-color: black;
+  color: white;
+}
+.Lower_container ul {
+  display: flex;
+  list-style: none;
+  gap: 5px;
+}
+.Lower_container ul li {
+  align-items: center;
+  padding: 8px;
+}
+.Lower_container ul li:first-child {
+  display: flex;
+  gap: 2px;
+  align-items: center;
+}
+
+@media screen and (max-width: 576px) {
+  .header_container {
+    display: flex;
+    flex-direction: column !important;
+    height: auto;
+  }
+  .Lower_container ul li:not(:first-child) {
+    display: none;
+  }
+  .language {
+    display: none;
+  }
+}

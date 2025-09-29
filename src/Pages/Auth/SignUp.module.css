@@ -1,0 +1,158 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f3f3f3;
+  padding: 20px;
+}
+
+.formContainer {
+  background: white;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+}
+
+.logo {
+  display: block;
+  text-align: center;
+  margin-bottom: 30px;
+  text-decoration: none;
+}
+
+.logoImg {
+  width: 120px;
+  height: auto;
+  object-fit: contain;
+}
+
+.form h1 {
+  font-size: 28px;
+  font-weight: 400;
+  margin-bottom: 20px;
+  color: #111;
+}
+
+.inputGroup {
+  margin-bottom: 20px;
+}
+
+.inputGroup label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 5px;
+  color: #111;
+  font-size: 14px;
+}
+
+.input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #a6a6a6;
+  border-radius: 4px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #007185;
+  box-shadow: 0 0 0 3px rgba(0, 113, 133, 0.1);
+}
+
+.validationText {
+  color: #d00;
+  font-size: 12px;
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+.submitButton {
+  width: 100%;
+  background: #ffd814;
+  border: none;
+  padding: 12px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #0f1111;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 20px;
+}
+
+.submitButton:hover:not(:disabled) {
+  background: #f7ca00;
+}
+
+.submitButton:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.error {
+  background: #ffe6e6;
+  color: #d00;
+  padding: 12px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  font-size: 14px;
+  border-left: 4px solid #d00;
+  box-shadow: 0 2px 4px rgba(208, 0, 0, 0.1);
+  line-height: 1.4;
+}
+
+.success {
+  background: #e6ffe6;
+  color: #006600;
+  padding: 12px;
+  border-radius: 4px;
+  margin-bottom: 15px;
+  font-size: 14px;
+  border-left: 4px solid #006600;
+  box-shadow: 0 2px 4px rgba(0, 102, 0, 0.1);
+  line-height: 1.4;
+}
+
+.termsText {
+  margin: 15px 0;
+  padding: 0 10px;
+}
+
+.termsText p {
+  font-size: 12px;
+  color: #555;
+  line-height: 1.4;
+  text-align: left;
+  margin: 0;
+}
+
+.signinLink {
+  text-align: center;
+  font-size: 14px;
+  color: #555;
+}
+
+.signinLink a {
+  color: #007185;
+  text-decoration: none;
+}
+
+.signinLink a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 480px) {
+  .formContainer {
+    padding: 20px;
+    margin: 10px;
+  }
+
+  .form h1 {
+    font-size: 24px;
+  }
+}
