@@ -11,17 +11,17 @@ import {
 
 // API Configuration
 const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL ||
-  "http://localhost:5001/clone-1e13a/us-central1/api";
+  import.meta.env.VITE_API_BASE_URL || "https://api-pk4tgockea-uc.a.run.app";
 
 // Payment service to handle Stripe integration and Firebase storage
 export class PaymentService {
   static async createPaymentIntent(amount, currency = "usd", metadata = {}) {
     try {
       console.log("Creating payment intent for amount:", amount);
+      console.log("API_BASE_URL:", API_BASE_URL);
 
       // Check if we should use demo mode or real API
-      const useDemoMode = false; // Use real Stripe integration
+      const useDemoMode = true; // Temporarily enable demo mode for testing
 
       if (useDemoMode) {
         // DEMO MODE: Simulate payment intent creation
@@ -35,6 +35,10 @@ export class PaymentService {
       }
 
       // REAL MODE: Call backend API
+      console.log(
+        "Making request to:",
+        `${API_BASE_URL}/api/payment/create?total=${amount}`
+      );
       const response = await fetch(
         `${API_BASE_URL}/api/payment/create?total=${amount}`,
         {
@@ -46,14 +50,26 @@ export class PaymentService {
       );
 
       if (!response.ok) {
+        console.error(
+          "API Response not OK:",
+          response.status,
+          response.statusText
+        );
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
       const data = await response.json();
-      console.log("Payment intent created:", data.paymentIntentId);
+      console.log("Payment intent created:", data);
       return data.clientSecret;
     } catch (error) {
       console.error("Error creating payment intent:", error);
+      console.error("Error details:", {
+        message: error.message,
+        stack: error.stack,
+        name: error.name,
+        cause: error.cause,
+      });
+      console.error("Full error object:", error);
       throw error;
     }
   }
@@ -63,7 +79,7 @@ export class PaymentService {
       console.log("Confirming payment:", { paymentIntentId, paymentMethodId });
 
       // Check if we should use demo mode or real API
-      const useDemoMode = false; // Use real Stripe integration
+      const useDemoMode = true; // Temporarily enable demo mode for testing
 
       if (useDemoMode) {
         // DEMO MODE: Simulate payment confirmation

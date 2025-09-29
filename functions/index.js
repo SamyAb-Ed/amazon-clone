@@ -5,6 +5,11 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const admin = require("firebase-admin");
 
+// Updated: Force redeployment to show "Successful create operation"
+const { setGlobalOptions } = require("firebase-functions");
+
+setGlobalOptions({ maxInstances: 10 });
+
 // Initialize Firebase Admin SDK
 admin.initializeApp();
 const db = admin.firestore();

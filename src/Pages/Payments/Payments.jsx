@@ -12,7 +12,7 @@ import { loadStripe } from "@stripe/stripe-js";
 
 const stripePromise = loadStripe(
   import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY ||
-    "pk_test_YOUR_STRIPE_PUBLISHABLE_KEY_HERE"
+    "pk_test_51SAjX1QbeOMfJMMaMpIm0QPXwJiqDuKTeZq4N5sg6DQr4NtfKgRLpKJ2aCLcreQmE0Kh15XnjhxwadcXsU30S2hT00IUkgENjn"
 );
 
 const Payments = () => {

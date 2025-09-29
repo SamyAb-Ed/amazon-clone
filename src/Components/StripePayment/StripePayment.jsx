@@ -13,7 +13,7 @@ import classes from "./StripePayment.module.css";
 // Initialize Stripe with TEST keys only
 const stripePromise = loadStripe(
   import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY ||
-    "pk_test_YOUR_STRIPE_PUBLISHABLE_KEY_HERE"
+    "pk_test_51SAjX1QbeOMfJMMaMpIm0QPXwJiqDuKTeZq4N5sg6DQr4NtfKgRLpKJ2aCLcreQmE0Kh15XnjhxwadcXsU30S2hT00IUkgENjn"
 ).catch((error) => {
   console.warn("Stripe failed to load:", error);
   return null;
@@ -36,36 +36,41 @@ const CheckoutForm = ({
     event.preventDefault();
 
     if (!stripe || !elements) {
+      console.error("Stripe or Elements not loaded:", {
+        stripe: !!stripe,
+        elements: !!elements,
+      });
+      setError(
+        "Payment system not ready. Please refresh the page and try again."
+      );
       return;
     }
 
+    // Additional check for Stripe initialization
+    if (!stripePromise) {
+      console.error("Stripe promise not initialized");
+      setError("Payment system failed to initialize. Please refresh the page.");
+      return;
+    }
+
+    console.log("Starting payment process...");
     setProcessing(true);
     setError(null);
 
     const cardElement = elements.getElement(CardElement);
 
     // Validate that card information is provided
-    if (!cardElement || !cardElement._complete) {
-      setError("You should provide a valid card number to proceed");
-      setProcessing(false);
-      return;
-    }
-
-    // Additional validation to check if card element has valid data
-    const { error: cardError } = await stripe.createPaymentMethod({
-      type: "card",
-      card: cardElement,
-    });
-
-    if (cardError) {
-      setError("You should provide a valid card number to proceed");
+    if (!cardElement) {
+      setError(
+        "Card element not found. Please refresh the page and try again."
+      );
       setProcessing(false);
       return;
     }
 
     try {
       // Check if we should use demo mode or real Stripe
-      const useDemoMode = false; // Use real Stripe integration
+      const useDemoMode = true; // Temporarily enable demo mode for testing
 
       if (useDemoMode) {
         // DEMO MODE: Simulate payment process
@@ -101,7 +106,11 @@ const CheckoutForm = ({
           });
 
         if (paymentMethodError) {
-          setError(paymentMethodError.message);
+          console.error("Payment method error:", paymentMethodError);
+          setError(
+            paymentMethodError.message ||
+              "Invalid card information. Please check your card details."
+          );
           setProcessing(false);
           return;
         }
@@ -125,7 +134,29 @@ const CheckoutForm = ({
       }
     } catch (err) {
       console.error("Payment error:", err);
-      setError("An unexpected error occurred. Please try again.");
+      console.error("Error details:", {
+        message: err.message,
+        stack: err.stack,
+        name: err.name,
+        cause: err.cause,
+      });
+
+      // More specific error messages
+      let errorMessage = "An unexpected error occurred. Please try again.";
+
+      if (err.message.includes("Failed to fetch")) {
+        errorMessage =
+          "Network error. Please check your internet connection and try again.";
+      } else if (err.message.includes("Invalid API key")) {
+        errorMessage =
+          "Payment system configuration error. Please contact support.";
+      } else if (err.message.includes("Your card was declined")) {
+        errorMessage = "Your card was declined. Please try a different card.";
+      } else if (err.message) {
+        errorMessage = err.message;
+      }
+
+      setError(errorMessage);
       onPaymentError(err);
     } finally {
       setProcessing(false);
@@ -145,7 +176,13 @@ const CheckoutForm = ({
         }}
       >
         <strong>DEMO MODE:</strong> This is a demonstration. No real payment
-        will be processed. You can use any card details for testing.
+        will be processed.
+        <br />
+        <strong>Use any card details:</strong> 4242 4242 4242 4242
+        <br />
+        <strong>Any future date for expiry, any 3 digits for CVC</strong>
+        <br />
+        <em>Orders will be saved to Firebase for testing purposes.</em>
       </div>
 
       <div className={classes.cardElementContainer}>
