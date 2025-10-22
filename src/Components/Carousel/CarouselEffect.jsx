@@ -12,14 +12,29 @@ const CarouselEffect = () => {
         infiniteLoop={true}
         showIndicators={false}
         showThumbs={false}
+        interval={3000}
+        transitionTime={500}
       >
         {img.map((imageItemLink, index) => {
           return (
-            <img
-              key={index}
-              src={imageItemLink}
-              alt={`Carousel image ${index + 1}`}
-            />
+            <div key={index}>
+              <img
+                src={imageItemLink}
+                alt={`Carousel image ${index + 1}`}
+                style={{
+                  width: "100%",
+                  height: "400px",
+                  objectFit: "cover",
+                }}
+                onError={(e) => {
+                  console.error(
+                    `Failed to load carousel image ${index + 1}:`,
+                    imageItemLink
+                  );
+                  e.target.style.display = "none";
+                }}
+              />
+            </div>
           );
         })}
       </Carousel>

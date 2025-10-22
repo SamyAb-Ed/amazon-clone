@@ -1,5 +1,10 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import Landing from "./Landing/Landing";
 import Auth from "./Auth/Auth";
 import Payment from "./Payments/Payments";
@@ -10,7 +15,7 @@ import ProductDetail from "./ProductDetail/ProductDetail";
 
 const Routing = () => {
   return (
-    <Router>
+    <Router basename="/amazon-clone">
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/auth/*" element={<Auth />} />
@@ -18,7 +23,9 @@ const Routing = () => {
         <Route path="/orders" element={<Orders />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/category/:categoryName" element={<Results />} />
-        <Route path="/products/:productId" element={<ProductDetail />} />
+        <Route path="/product/:productId" element={<ProductDetail />} />
+        {/* Catch all route for unmatched paths */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Router>
   );

@@ -41,13 +41,13 @@ export const AuthProvider = ({ children }) => {
       }
     );
 
-    // Add shorter timeout to prevent infinite loading
+    // Add timeout to prevent infinite loading
     const timeout = setTimeout(() => {
       console.log(
         "AuthProvider: Timeout reached - proceeding without authentication"
       );
       setLoading(false);
-    }, 2000); // Reduced from 5000 to 2000ms
+    }, 3000); // 3 seconds should be enough for Firebase to initialize
 
     return () => {
       console.log("AuthProvider: Cleaning up...");
@@ -173,7 +173,7 @@ export const AuthProvider = ({ children }) => {
         <div style={{ textAlign: "center" }}>
           <h2>Loading Amazon Clone...</h2>
           <p>Please wait while we initialize the application.</p>
-          <p>Timeout in 2 seconds if Firebase doesn't respond...</p>
+          <p>Initializing Firebase authentication...</p>
         </div>
       </div>
     );
