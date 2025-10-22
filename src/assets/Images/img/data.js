@@ -1,7 +1,7 @@
-import img1 from './10001.jpg'
-import img2 from './10002.jpg'
-import img3 from './10003.jpg'
-import img4 from './10004.jpg'
-import img5 from './10005.jpg'
-
-export const img = [img1,img2,img3,img4,img5]
+export const img = [
+  "https://images-eu.ssl-images-amazon.com/images/G/31/img21/Wireless/WLA/TS/D37847648_Accessories_savingdays_Jan22_Cat_PC_1500.jpg",
+  "https://images-eu.ssl-images-amazon.com/images/G/31/img21/Wireless/Shivam/WLA/TS/D37847648_Accessories_savingdays_Jan22_Cat_PC_1500.jpg",
+  "https://images-eu.ssl-images-amazon.com/images/G/31/img21/Wireless/Shivam/WLA/TS/D37847648_Accessories_savingdays_Jan22_Cat_PC_1500.jpg",
+  "https://images-eu.ssl-images-amazon.com/images/G/31/img21/Wireless/Shivam/WLA/TS/D37847648_Accessories_savingdays_Jan22_Cat_PC_1500.jpg",
+  "https://images-eu.ssl-images-amazon.com/images/G/31/img21/Wireless/Shivam/WLA/TS/D37847648_Accessories_savingdays_Jan22_Cat_PC_1500.jpg",
+];
