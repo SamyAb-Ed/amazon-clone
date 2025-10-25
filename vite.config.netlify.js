@@ -3,14 +3,14 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [react()],
-  // base: "/amazon-clone/", // Only use for GitHub Pages deployment
+  // No base path for Netlify (different from GitHub Pages)
   build: {
     outDir: "dist",
+    assetsDir: "assets",
   },
   server: {
     port: 3000,
     open: true,
-    historyApiFallback: true,
   },
   optimizeDeps: {
     include: ["firebase/app", "firebase/auth", "firebase/firestore"],
